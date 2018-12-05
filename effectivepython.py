@@ -12,7 +12,8 @@ class Notes(object):
 
     def trying_excepting(self):
         """ except gives us the possibility to cleanup our code regardless what happens on the try block! """
-        
+        print (" ")
+        print ("---- Trying Excepting Finally ---- ")
         try:
             print "Always gonna be executed"
             print self.three > self.nine
@@ -25,6 +26,7 @@ class Notes(object):
             print "Will ALWAYS be executed as well!"
 
     def handling_exception(self):
+        print (" ")
         print "---- Handling Exception ----"
         def divide(a, b):
             try:
@@ -39,6 +41,7 @@ class Notes(object):
         the helper function and iterate over the values from the main function.
         The flag Found is in Python 2 poorly implemented because we don't have the nonlocal keyword, hence we
         Found as list (mutable). '''
+        print (" ")
         print "---- Closure ----"
         def sorting_w_prio(values, group):
             Found = [False]
@@ -62,6 +65,7 @@ class Notes(object):
         necessarily stores the value (this makes a difference for huge iterations and saves memory. REMINDER:
         We could use a chain of generator expressions, which is quite fast as well. The output of one generator could feed
         the input of another! '''
+        print (" ")
         print "---- Generator Expression ----"
         # We store every squared value in the new list called sqd_value
         list = [1, 2, 3, 4, 5, 10 , 20]
@@ -76,11 +80,39 @@ class Notes(object):
         print gen
         print type(gen)
 
-        
+    def variable_positional_argument(self, x, y=1, *z):
+        ''' Usually we have a function that takes for instance 2 values as arguments, let's say that this function actua-
+        lly doesn't need the two values EVERY time it's called. And we want to pass just one argument... So we can use the
+        so famous variable position argument VPA. In this function we use x,y,z as inputs for this func. But z is a VPA.
+        Note that when printing the read value from z is contained in a tuple.
+        Instead of using VPA for some variable that we don't always need to use we could use the keyword and setting it
+        to a value that doesn't change the function! Only when set differently, so we set it to a fixed value like z=1.
+        IMPORTANT: we use None as pre-defined value on a position argument that is mutable. '''
+        print (" ")
+        print ("---- Variable Positional Argument ----")
+        w = x + 10
+        print ("Value of x + 10 = "), w
+        print ("Value of y:"), y
+        if y != 1:
+            print ("The user has given a different value for y: "), y
+        print ("Value of z:"), z
+
+    def keywordarguments_are_important(self, **kwargs):
+        """ In this case our function doesn't require ANYTHING. But if we want to provide any value,
+        we have then to use the keyword assign to the function, otherwise it will complain about it. """
+        print (" ")
+        print ("---- Testing kwarg ----")
+        print ("Printing the keyword arguments given by the user: \n"), kwargs
+
+
 def main():
     test = Notes()
     test.trying_excepting()
-    test.handling_exception()
+    #test.handling_exception()
+    test.variable_positional_argument(5,5,5)
+    # Now we wish to give only ONE variable for it and even though the function doesn't complain about it.
+    test.variable_positional_argument(3)
+    test.keywordarguments_are_important(test1="Hello", test2=10)
 
 if __name__ == "__main__":
     main()
