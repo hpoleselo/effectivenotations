@@ -1,4 +1,7 @@
 import collections
+import argparse
+
+
 print(" ")
 print("-------- Book Notes from Effective Python --------")
 print(" ")
@@ -125,6 +128,16 @@ if chapter == 2:
         def defaultdict(self):
             """ Works like a mini github where we can differentiate what has been changed! Super. """
             default_list = [10, 20, 30, 40]
+
+        def test_assert(self):
+            """ assert is just for testing a condition in Python, if it's not satisfied (returns False)
+            and then it raises an AssertError. A short way to validate if something is True or Not!"""
+            print (" ")
+            print ("---- Testing assert ----")
+            print ("Will raise an AssertError!")
+            x = 10
+            y = 20
+            assert x == y
         
         
 
@@ -138,6 +151,7 @@ if chapter == 2:
         # Now we wish to give only ONE variable for it and even though the function doesn't complain about it.
         nc2.variable_positional_argument(3)
         nc2.keywordarguments_are_important(test1="Hello", test2=10)
+        nc2.test_assert()
         
 
     main()
@@ -163,3 +177,58 @@ if chapter == 3:
         ecc(2,3)
     main()
 
+
+    def parser():
+        # In order to run this function we have to execute the python file as:
+        # python effectivepython.py -d alvar
+        # Because -d is an optional argument and by not giving it to the program the parser parses nothing.
+        class Parser(object):
+            def __init__(self):
+                parser = argparse.ArgumentParser(description="Aruco or Alvar")
+                parser.add_argument("-d", "--detection", help="String to choose between Aruco or Alvar detection.")
+                self.args = parser.parse_args()
+                super(Parser, self).__init__()
+
+
+        class TypeOfDetection(Parser):
+            def __init__(self):
+                print ("")
+                print ("---- Parser Example with Class Inheritance ----")
+                Parser.__init__(self)
+                detection = self.args.detection
+                if detection == "aruco":
+                    print ("Will run aruco")
+                if detection == "alvar":
+                    print ("Will run alvar")
+        TypeOfDetection()
+    parser()
+
+
+    def mult_class_inheritance():
+        print ("")
+        print ("---- Inheritance between Classes ----")
+        class A(object):
+            def __init__(self):
+                # Will be printed after B
+                print ("This is A")
+                self.x = 10
+                super(A, self).__init__()
+
+        class B(A):
+            def __init__(self):
+                # Will be printed before A because we call the Class B, and B calls then A.
+                print("This is B")
+                A.__init__(self)
+                # Inheriting variable from A
+                print self.x
+        # Calling B
+        B()
+
+    mult_class_inheritance()
+
+
+
+
+else:
+    print("Not a valid option... Exiting the program.")
+    quit()
