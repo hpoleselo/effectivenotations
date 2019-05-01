@@ -2,22 +2,22 @@ import csv
 import numpy as np
 import matplotlib as plt
 
-def countColumns():
+def countRows():
     with open('file_to_plot.csv', 'r') as f:
-    	valor = len(list(f))
-	return valor
+    	numberOfRows = len(list(f))
+	return numberOfRows
 
 
 def plot():
-	valor = countColumns()
+	noOfRows = countRows()
 	csv_file = open("file_to_plot.csv","r+")
 	csv_file = csv.reader(csv_file, delimiter=',')
 	line_count = 0
 	i = 0
 
 	# To store the values of x and y
-	x = np.zeros(valor)
-	y = np.zeros(valor)
+	x = np.zeros(noOfRows)
+	y = np.zeros(noOfRows)
 
 	for row in csv_file:
 		# We jump over the first row because it's a string!
